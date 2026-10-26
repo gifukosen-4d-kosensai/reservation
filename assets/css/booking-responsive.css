@@ -1,0 +1,20 @@
+/* booking-responsive.css：予約画面の担当スタイル。 */
+@media (max-width: 900px) {
+  .booking-layout {
+    grid-template-columns: 1fr;
+  }
+}
+@media (max-width: 520px) {
+  .slot-card {
+    grid-template-columns: 1fr;
+  }
+  .slot-select {
+    width: 100%;
+  }
+  .dialog__actions {
+    flex-direction: column-reverse;
+  }
+  .dialog__actions button {
+    width: 100%;
+  }
+}

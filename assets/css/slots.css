@@ -1,0 +1,66 @@
+/* slots.css：予約画面の担当スタイル。 */
+.slots {
+  display: grid;
+  gap: 0.85rem;
+}
+.slot-card {
+  border: 1px solid rgba(255, 255, 255, 0.09);
+  background: #1c1c1c;
+  border-radius: 4px;
+  padding: 1rem;
+  display: grid;
+  grid-template-columns: 1fr auto;
+  gap: 1rem;
+  align-items: center;
+}
+.slot-card.selected {
+  border-color: var(--red);
+  box-shadow: 0 0 0 1px var(--red) inset;
+}
+.slot-card.soldout {
+  opacity: 0.55;
+}
+.slot-time {
+  color: var(--red);
+  font-family: 'Antonio', sans-serif;
+  font-size: 1.35rem;
+  letter-spacing: 0.04em;
+}
+.slot-title {
+  font-weight: 700;
+  margin: 0.1rem 0 0.35rem;
+}
+.slot-meta {
+  color: #bbb;
+  font-size: 0.88rem;
+}
+.capacity {
+  margin-top: 0.55rem;
+  height: 7px;
+  background: #3b3b3b;
+  border-radius: 99px;
+  overflow: hidden;
+}
+.capacity > span {
+  display: block;
+  height: 100%;
+  background: var(--red);
+  width: 0;
+}
+.slot-select {
+  min-width: 90px;
+  border: 1px solid var(--red);
+  color: #fff;
+  background: transparent;
+  border-radius: 3px;
+  padding: 0.55rem 0.75rem;
+  cursor: pointer;
+}
+.slot-select:hover:not(:disabled) {
+  background: var(--red);
+}
+.slot-select:disabled {
+  cursor: not-allowed;
+  border-color: #555;
+  color: #999;
+}

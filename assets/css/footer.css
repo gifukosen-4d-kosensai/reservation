@@ -1,0 +1,12 @@
+/* footer.css：この役割のルールだけを追加してください。 */
+.site-footer {
+  background: #000;
+  border-top: 1px solid rgba(255, 255, 255, 0.08);
+  padding: 2.4rem 0;
+  color: #a8a8a8;
+  font-size: 0.86rem;
+  text-align: center;
+}
+.site-footer strong {
+  color: #fff;
+}

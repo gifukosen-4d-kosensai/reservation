@@ -1,0 +1,51 @@
+/* layout.css：この役割のルールだけを追加してください。 */
+.page-shell {
+  background:
+    linear-gradient(180deg, rgba(39, 39, 39, 0.98), rgba(28, 28, 28, 0.98)),
+    repeating-linear-gradient(135deg, rgba(255, 255, 255, 0.025) 0 2px, transparent 2px 8px);
+}
+.section {
+  padding: clamp(4rem, 8vw, 7.5rem) 0;
+  position: relative;
+}
+.section--dark {
+  background: var(--panel-2);
+}
+.section--redline::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 50%;
+  transform: translateX(-50%);
+  width: min(92%, var(--max));
+  height: 1px;
+  background: var(--line);
+}
+.inner {
+  width: min(90%, var(--max));
+  margin: auto;
+}
+.section-title {
+  margin-bottom: 2.4rem;
+  text-align: center;
+}
+.section-title .en {
+  display: block;
+  color: var(--red);
+  font-family: 'Antonio', sans-serif;
+  font-size: clamp(3.2rem, 8vw, 6rem);
+  line-height: 0.9;
+  letter-spacing: -0.02em;
+}
+.section-title .ja {
+  display: block;
+  margin-top: 0.65rem;
+  font-size: 1.05rem;
+  font-weight: 700;
+}
+.section-lead {
+  max-width: 780px;
+  margin: 0 auto 3rem;
+  text-align: center;
+  color: #dedede;
+}

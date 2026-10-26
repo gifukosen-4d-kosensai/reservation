@@ -1,0 +1,71 @@
+/* hero.css：この役割のルールだけを追加してください。 */
+.hero {
+  min-height: 76vh;
+  display: grid;
+  align-items: end;
+  position: relative;
+  overflow: hidden;
+  background:
+    linear-gradient(180deg, rgba(0, 0, 0, 0.08), rgba(0, 0, 0, 0.88)),
+    radial-gradient(circle at 72% 30%, rgba(215, 23, 24, 0.38), transparent 18%),
+    linear-gradient(125deg, #111 0 38%, #2b2b2b 38% 62%, #090909 62%);
+}
+.hero::before,
+.hero::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+}
+.hero::before {
+  opacity: 0.35;
+  background-image:
+    repeating-linear-gradient(90deg, transparent 0 79px, rgba(255, 255, 255, 0.05) 80px),
+    repeating-linear-gradient(0deg, transparent 0 79px, rgba(255, 255, 255, 0.03) 80px);
+}
+.hero::after {
+  width: 42vw;
+  height: 120vh;
+  inset: -15vh 7vw auto auto;
+  transform: rotate(13deg);
+  border-left: 2px solid rgba(215, 23, 24, 0.78);
+  border-right: 1px solid rgba(255, 255, 255, 0.13);
+  background: linear-gradient(90deg, transparent, rgba(215, 23, 24, 0.12), transparent);
+}
+.hero__inner {
+  position: relative;
+  z-index: 2;
+  width: min(92%, var(--max));
+  margin: 0 auto;
+  padding: 9rem 0 5rem;
+}
+.hero__eyebrow {
+  font-family: 'Antonio', sans-serif;
+  letter-spacing: 0.18em;
+  color: var(--red);
+  font-weight: 700;
+  font-size: clamp(1rem, 2.2vw, 1.55rem);
+}
+.hero h1 {
+  margin: 0.2rem 0 0;
+  font-family: 'Antonio', 'Noto Sans JP', sans-serif;
+  font-size: clamp(4.4rem, 13vw, 10.5rem);
+  letter-spacing: -0.035em;
+  line-height: 0.84;
+  text-transform: uppercase;
+  text-shadow: 0 8px 40px rgba(0, 0, 0, 0.45);
+}
+.hero h1 span {
+  color: var(--red);
+}
+.hero__jp {
+  margin: 1.4rem 0 0;
+  font-size: clamp(1.1rem, 2.5vw, 1.8rem);
+  font-weight: 700;
+  letter-spacing: 0.08em;
+}
+.hero__note {
+  margin-top: 0.4rem;
+  color: #d5d5d5;
+  max-width: 52rem;
+}

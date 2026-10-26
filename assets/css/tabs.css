@@ -1,0 +1,42 @@
+/* tabs.css：予約画面の担当スタイル。 */
+.tabs {
+  display: flex;
+  gap: 0.5rem;
+  margin-bottom: 1.3rem;
+}
+.tab {
+  flex: 1;
+  border: 1px solid #4b4b4b;
+  background: #161616;
+  color: #ddd;
+  min-height: 45px;
+  cursor: pointer;
+  border-radius: 3px;
+  font-weight: 700;
+}
+.tab.active {
+  background: var(--red);
+  border-color: var(--red);
+  color: #fff;
+}
+.tab-panel[hidden] {
+  display: none;
+}
+
+.reservation-result {
+  display: none;
+  margin-top: 1.2rem;
+  border-top: 1px solid rgba(255, 255, 255, 0.1);
+  padding-top: 1.2rem;
+}
+.reservation-result.show {
+  display: block;
+}
+.result-id {
+  font-family: ui-monospace, SFMono-Regular, Consolas, monospace;
+  font-size: 0.9rem;
+  word-break: break-all;
+  background: #080808;
+  padding: 0.65rem;
+  border-radius: 3px;
+}

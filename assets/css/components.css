@@ -1,0 +1,213 @@
+/* components.css：この役割のルールだけを追加してください。 */
+.feature-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 1.4rem;
+}
+.feature-card {
+  background: #111;
+  border: 1px solid rgba(255, 255, 255, 0.09);
+  border-radius: 4px;
+  overflow: hidden;
+  min-height: 100%;
+  box-shadow: 0 18px 40px rgba(0, 0, 0, 0.2);
+}
+.feature-card__visual {
+  aspect-ratio: 16/10;
+  position: relative;
+  overflow: hidden;
+  background:
+    linear-gradient(135deg, rgba(215, 23, 24, 0.22), transparent 45%),
+    linear-gradient(45deg, #090909, #414141);
+}
+.feature-card__visual::after {
+  content: attr(data-label);
+  position: absolute;
+  left: 1.2rem;
+  bottom: 1rem;
+  font-family: 'Antonio', sans-serif;
+  letter-spacing: 0.11em;
+  color: rgba(255, 255, 255, 0.8);
+  font-size: 1.25rem;
+}
+.feature-card__body {
+  padding: 1.5rem 1.45rem 1.7rem;
+}
+.feature-card h3 {
+  margin: 0 0 0.7rem;
+  font-size: 1.35rem;
+}
+.feature-card p {
+  margin: 0;
+  color: #c9c9c9;
+  font-size: 0.96rem;
+}
+
+.btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-width: 240px;
+  min-height: 58px;
+  padding: 0.8rem 1.5rem;
+  border: 0;
+  border-radius: 4px;
+  color: #fff;
+  background: var(--red);
+  font-weight: 700;
+  box-shadow: 0 4px 4px rgba(0, 0, 0, 0.28);
+  cursor: pointer;
+  transition: 0.2s ease;
+}
+.btn:hover {
+  filter: brightness(1.1);
+  transform: translateY(-1px);
+}
+.btn::after {
+  content: '›';
+  font-size: 1.55rem;
+  margin-left: 0.7rem;
+  line-height: 1;
+}
+.btn--ghost {
+  background: transparent;
+  border: 1px solid var(--red);
+}
+.cta-row {
+  display: flex;
+  gap: 1rem;
+  justify-content: center;
+  flex-wrap: wrap;
+  margin-top: 2rem;
+}
+
+.visual-break {
+  height: min(55vw, 560px);
+  min-height: 300px;
+  display: grid;
+  place-items: center;
+  position: relative;
+  overflow: hidden;
+  background:
+    linear-gradient(rgba(0, 0, 0, 0.28), rgba(0, 0, 0, 0.45)),
+    radial-gradient(circle at 28% 50%, rgba(215, 23, 24, 0.44), transparent 16%),
+    linear-gradient(120deg, #131313 0 28%, #4a4a4a 28% 45%, #101010 45% 100%);
+  background-attachment: fixed;
+}
+.visual-break__mark {
+  position: relative;
+  z-index: 1;
+  font-family: 'Antonio', sans-serif;
+  font-size: clamp(4rem, 15vw, 11rem);
+  letter-spacing: 0.12em;
+  color: rgba(255, 255, 255, 0.14);
+}
+
+.info-columns {
+  display: grid;
+  grid-template-columns: 1.1fr 0.9fr;
+  gap: 3.5rem;
+  align-items: start;
+}
+.info-box {
+  padding: 1.8rem;
+  background: rgba(0, 0, 0, 0.28);
+  border-left: 3px solid var(--red);
+}
+.info-box h3 {
+  margin-top: 0;
+}
+.info-box p:last-child {
+  margin-bottom: 0;
+}
+.meta-list {
+  display: grid;
+  gap: 1rem;
+  margin: 0;
+}
+.meta-list div {
+  display: grid;
+  grid-template-columns: 8rem 1fr;
+  gap: 1rem;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.09);
+  padding-bottom: 0.8rem;
+}
+.meta-list dt {
+  color: var(--red);
+  font-weight: 700;
+}
+.meta-list dd {
+  margin: 0;
+}
+
+.detail-hero {
+  padding: clamp(4rem, 10vw, 8rem) 0 3.5rem;
+  background: linear-gradient(120deg, #111, #2c2c2c 50%, #090909);
+  border-bottom: 1px solid var(--line);
+}
+.detail-hero .en {
+  color: var(--red);
+  font-family: 'Antonio', sans-serif;
+  font-size: clamp(4rem, 10vw, 7rem);
+  line-height: 0.9;
+}
+.detail-hero h1 {
+  margin: 0.7rem 0 0;
+  font-size: clamp(1.8rem, 4vw, 3rem);
+}
+.detail-hero p {
+  max-width: 760px;
+  color: #d2d2d2;
+}
+
+.research-list {
+  display: grid;
+  gap: 1.2rem;
+}
+.research-item {
+  display: grid;
+  grid-template-columns: 260px 1fr;
+  gap: 1.6rem;
+  background: #131313;
+  border: 1px solid rgba(255, 255, 255, 0.08);
+}
+.research-item__visual {
+  min-height: 190px;
+  background: linear-gradient(135deg, #3a3a3a, #090909);
+  position: relative;
+}
+.research-item__visual::after {
+  content: 'PHOTO';
+  position: absolute;
+  inset: auto 1rem 1rem auto;
+  color: var(--red);
+  font-family: 'Antonio', sans-serif;
+  letter-spacing: 0.12em;
+}
+.research-item__body {
+  padding: 1.5rem 1.6rem 1.5rem 0;
+}
+.research-item__body h2 {
+  margin: 0 0 0.5rem;
+  font-size: 1.4rem;
+}
+.research-item__body p {
+  color: #c8c8c8;
+}
+.tag {
+  display: inline-block;
+  padding: 0.22rem 0.55rem;
+  margin-right: 0.45rem;
+  background: var(--red);
+  border-radius: 2px;
+  font-size: 0.78rem;
+  font-weight: 700;
+}
+
+/* HTML内に直書きしていた配置を名前付きクラスで管理。 */
+.section-title--left {
+  text-align: left;
+}
+.cta-row--left {
+  justify-content: flex-start;
+}

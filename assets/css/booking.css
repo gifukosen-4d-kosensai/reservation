@@ -1,0 +1,7 @@
+/* 予約専用CSSの読込入口。 */
+@import url('./booking-layout.css');
+@import url('./slots.css');
+@import url('./forms.css');
+@import url('./tabs.css');
+@import url('./dialogs.css');
+@import url('./booking-responsive.css');

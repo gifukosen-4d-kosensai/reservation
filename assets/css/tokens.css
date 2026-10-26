@@ -1,0 +1,14 @@
+/* tokens.css：この役割のルールだけを追加してください。 */
+@import url('https://fonts.googleapis.com/css2?family=Antonio:wght@500;700&family=Noto+Sans+JP:wght@400;500;700;900&display=swap');
+
+:root {
+  --red: #d71718;
+  --red-dark: #8e0e10;
+  --black: #050505;
+  --panel: #272727;
+  --panel-2: #171717;
+  --white: #f7f7f7;
+  --muted: #b8b8b8;
+  --line: rgba(215, 23, 24, 0.5);
+  --max: 1200px;
+}

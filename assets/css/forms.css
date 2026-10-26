@@ -1,0 +1,70 @@
+/* forms.css：予約画面の担当スタイル。 */
+.form-grid {
+  display: grid;
+  gap: 1rem;
+}
+.field {
+  display: grid;
+  gap: 0.38rem;
+}
+.field label {
+  font-weight: 700;
+  font-size: 0.94rem;
+}
+.field small {
+  color: #aaa;
+  line-height: 1.45;
+}
+.field input,
+.field select {
+  width: 100%;
+  color: #fff;
+  background: #202020;
+  border: 1px solid #505050;
+  border-radius: 4px;
+  min-height: 50px;
+  padding: 0.7rem 0.8rem;
+  outline: none;
+}
+.field input:focus,
+.field select:focus {
+  border-color: var(--red);
+  box-shadow: 0 0 0 2px rgba(215, 23, 24, 0.17);
+}
+.field input::placeholder {
+  color: #777;
+}
+.form-error {
+  display: none;
+  color: #ff9b9b;
+  border-left: 3px solid var(--red);
+  padding: 0.55rem 0.8rem;
+  background: rgba(215, 23, 24, 0.09);
+}
+.form-error.show {
+  display: block;
+}
+.form-note {
+  color: #aaa;
+  font-size: 0.82rem;
+  line-height: 1.55;
+}
+.form-note strong {
+  color: #ddd;
+}
+
+.notice {
+  margin-top: 1rem;
+  padding: 1rem;
+  background: rgba(215, 23, 24, 0.08);
+  border: 1px solid rgba(215, 23, 24, 0.3);
+  color: #ddd;
+  font-size: 0.9rem;
+}
+
+.cancel-reservation {
+  min-height: 46px;
+  padding: 0.7rem 1rem;
+  border-radius: 4px;
+  cursor: pointer;
+}

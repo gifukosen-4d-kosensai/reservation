@@ -1,0 +1,232 @@
+<!doctype html>
+<html lang="ja">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width,initial-scale=1" />
+    <meta name="description" content="2026高専祭4D専門展 予約" />
+    <title>RESERVATION | 4D KOSENSAI SENMONTEN</title>
+    <link rel="stylesheet" href="./assets/css/site.css" />
+    <link rel="stylesheet" href="./assets/css/booking.css" />
+  </head>
+  <body>
+    <a class="skip-link" href="#main">本文へ移動</a>
+
+    <header class="hero booking-hero">
+      <div class="hero__inner">
+        <div class="hero__eyebrow">4D KOSENSAI SENMONTEN · BOOKING SYSTEM</div>
+        <h1><span>RESER</span>VATION</h1>
+        <p class="hero__jp">専門展発表 予約受付</p>
+        <p class="hero__note">
+        </p>
+      </div>
+    </header>
+
+    <nav class="site-nav" aria-label="予約サイトナビゲーション">
+      <div class="site-nav__inner">
+        <a
+          class="nav-link"
+          data-main-link=""
+          href="https://gifukosen-4d-kosensai.github.io/gifukosen-4d-kosensai/"
+          ><span class="en">TOP</span><span class="ja">メインサイト</span></a
+        >
+        <a
+          class="nav-link"
+          data-main-link="department.html"
+          href="https://gifukosen-4d-kosensai.github.io/gifukosen-4d-kosensai/department.html"
+          ><span class="en">DEPARTMENT</span><span class="ja">学科紹介</span></a
+        >
+        <a
+          class="nav-link"
+          data-main-link="presentations.html"
+          href="https://gifukosen-4d-kosensai.github.io/gifukosen-4d-kosensai/presentations.html"
+          ><span class="en">PRESENTATION</span><span class="ja">発表内容</span></a
+        >
+        <a class="nav-link" href="./index.html" aria-current="page"
+          ><span class="en">RESERVATION</span><span class="ja">予約</span></a
+        >
+      </div>
+    </nav>
+
+    <main id="main" class="page-shell">
+      <section class="section">
+        <div class="inner booking-layout">
+          <section class="panel" aria-labelledby="slots-title">
+            <h2 id="slots-title"><span class="en">SCHEDULE</span>日時・残席</h2>
+            <div class="status-bar">
+              <span id="apiStatusDot" class="status-dot"></span
+              ><span id="apiStatusText">4D Kosensai DBへ接続しています…</span>
+            </div>
+            <div id="slots" class="slots" aria-live="polite"><p>読込中…</p></div>
+            <div class="notice">
+              <p>
+                予約は原則として1人につき1件です。重複予約は行わないでください。
+              </p>
+              <p>
+                予約完了メールが届かない場合は、迷惑メールフォルダやメールアドレスの入力間違いをご確認ください。
+              </p>
+            </div>
+          </section>
+
+          <section class="panel" aria-labelledby="form-title">
+            <div class="tabs" role="tablist" aria-label="予約操作">
+              <button id="tabBook" class="tab active" type="button" role="tab" aria-selected="true">
+                新規予約
+              </button>
+              <button id="tabManage" class="tab" type="button" role="tab" aria-selected="false">
+                確認・キャンセル
+              </button>
+            </div>
+
+            <div id="bookPanel" class="tab-panel">
+              <h2 id="form-title"><span class="en">ENTRY</span>予約情報</h2>
+              <form id="bookingForm" class="form-grid" novalidate>
+                <div class="field">
+                  <label for="slotId">発表日時</label
+                  ><select id="slotId" name="slotId" required>
+                    <option value="">日時を選択してください</option>
+                  </select>
+                </div>
+                <div class="field">
+                  <label for="partySize">人数</label
+                  ><select id="partySize" name="partySize" required>
+                    <option value="1">1人</option>
+                    <option value="2">2人</option>
+                    <option value="3">3人</option>
+                    <option value="4">4人</option>
+                    <option value="5">5人</option>
+                    <option value="6">6人</option></select
+                  ><small></small>
+                </div>
+                <div class="field">
+                  <label for="email">メールアドレス</label
+                  ><input
+                    id="email"
+                    name="email"
+                    type="email"
+                    autocomplete="email"
+                    placeholder="example@example.com"
+                    maxlength="254"
+                    required
+                  /><small></small>
+                </div>
+                <div class="field">
+                  <label for="passphrase">あいことば</label
+                  ><input
+                    id="passphrase"
+                    name="passphrase"
+                    type="password"
+                    autocomplete="new-password"
+                    minlength="6"
+                    maxlength="64"
+                    required
+                  /><small
+                    >6〜64文字。予約確認・キャンセル時に同じものを使います。</small
+                  >
+                </div>
+                <div id="turnstileContainer" class="field" hidden>
+                  <label></label>
+                  <div id="turnstileWidget"></div>
+                </div>
+                <div id="bookingError" class="form-error" role="alert"></div>
+                <button class="btn" type="submit">注意事項を確認して予約</button>
+                <p class="form-note">
+                  <strong>端末情報について：</strong
+                  >ブラウザにランダムIDを1つ保存します。機種名、OS、広告ID、ブラウザ指紋などは取得しません。
+                </p>
+              </form>
+            </div>
+
+            <div id="managePanel" class="tab-panel" hidden>
+              <h2><span class="en">MANAGE</span>予約確認・キャンセル</h2>
+              <form id="lookupForm" class="form-grid" novalidate>
+                <div class="field">
+                  <label for="lookupEmail">予約時のメールアドレス</label
+                  ><input
+                    id="lookupEmail"
+                    type="email"
+                    autocomplete="email"
+                    maxlength="254"
+                    required
+                  />
+                </div>
+                <div class="field">
+                  <label for="lookupPassphrase">予約時のあいことば</label
+                  ><input
+                    id="lookupPassphrase"
+                    type="password"
+                    autocomplete="current-password"
+                    minlength="6"
+                    maxlength="64"
+                    required
+                  />
+                </div>
+                <div id="lookupError" class="form-error" role="alert"></div>
+                <button class="btn" type="submit">予約を確認</button>
+              </form>
+              <div id="reservationResult" class="reservation-result" aria-live="polite"></div>
+            </div>
+
+            <div class="privacy-box">
+              <h3>個人情報の取り扱いについて</h3>
+              <p>
+                予約時に入力されたメールアドレスは、予約完了メールの送信と二重予約防止のために使用します。高専祭終了後、すべてのメールアドレスは即時削除されます。
+              </p>
+              <p>
+                予約時に入力されたあいことばは、予約確認・キャンセル時の本人確認のために使用します。あいことばはサーバーに平文で保存されず、ハッシュ化して保存されます。
+              </p>
+            </div>
+          </section>
+        </div>
+      </section>
+    </main>
+
+    <!-- 予約確定直前の注意事項ポップアップ。JS が選択内容を差し込みます。 -->
+    <dialog id="termsDialog" class="dialog">
+      <div class="dialog__header">
+        <div class="en">CAUTION</div>
+        <h2>予約前の注意事項</h2>
+      </div>
+      <div class="dialog__body">
+        <ul>
+          <li>予約は原則として1人につき1件です。重複予約は行わないでください。</li>
+          <li>開始時刻の5分前を目安に会場へお越しください。</li>
+          <li>人数変更が必要な場合は一度キャンセルし、残席を確認して取り直してください。</li>
+          <li>入力したメールアドレスへ予約完了メールを送信します。</li>
+          <li>学校行事の都合等で内容・時間が変更される場合があります。</li>
+        </ul>
+        <div id="termsSummary" class="summary-box"></div>
+        <label class="check-row"
+          ><input id="termsAgree" type="checkbox" /><span
+            >上記の注意事項と、予約処理に必要なメールアドレス・端末用ランダムIDの利用に同意します。</span
+          ></label
+        >
+      </div>
+      <div class="dialog__actions">
+        <button id="termsCancel" class="btn-plain" type="button">戻る</button
+        ><button id="termsConfirm" class="btn-danger" type="button" disabled>
+          同意して予約する
+        </button>
+      </div>
+    </dialog>
+
+    <dialog id="messageDialog" class="dialog">
+      <div class="dialog__header">
+        <div id="messageDialogEn" class="en">DONE</div>
+        <h2 id="messageDialogTitle">予約完了</h2>
+      </div>
+      <div id="messageDialogBody" class="dialog__body"></div>
+      <div class="dialog__actions">
+        <button id="messageDialogClose" class="btn-danger" type="button">閉じる</button>
+      </div>
+    </dialog>
+
+    <footer class="site-footer">
+      <div class="inner">
+        <strong>4D KOSENSAI SENMONTEN · BOOKING SYSTEM</strong><br />予約システム / GitHub Pages frontend
+        + private API server
+      </div>
+    </footer>
+    <script src="./config.js"></script>
+    <script src="./assets/js/app.js" type="module"></script>
+  </body>
+</html>

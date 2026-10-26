@@ -1,0 +1,42 @@
+/* navigation.css：この役割のルールだけを追加してください。 */
+.site-nav {
+  position: sticky;
+  top: 0;
+  z-index: 200;
+  background: rgba(0, 0, 0, 0.82);
+  backdrop-filter: blur(10px);
+  border-top: 1px solid rgba(215, 23, 24, 0.25);
+  border-bottom: 1px solid rgba(215, 23, 24, 0.28);
+}
+.site-nav__inner {
+  width: min(100%, 1450px);
+  margin: auto;
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+}
+.nav-link {
+  min-height: 82px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+  transition: 0.25s;
+  border-right: 1px solid rgba(255, 255, 255, 0.05);
+}
+.nav-link:hover,
+.nav-link[aria-current='page'] {
+  background: rgba(255, 255, 255, 0.07);
+}
+.nav-link .en {
+  color: var(--red);
+  font-family: 'Antonio', sans-serif;
+  font-size: clamp(1.05rem, 2vw, 1.45rem);
+  line-height: 1;
+  letter-spacing: 0.07em;
+}
+.nav-link .ja {
+  margin-top: 0.3rem;
+  font-size: 0.88rem;
+  font-weight: 700;
+}
