@@ -23,11 +23,18 @@ export function createSlots({ state, api, setApiStatus }) {
   }
   function scheduleNextClose() {
     clearTimeout(closeTimer);
-    const times = state.slots.map((slot) => new Date(slot.startAt).getTime()).filter((time) => time > now());
+    const times = [...state.slots.map((slot) => new Date(slot.startAt).getTime()), Date.parse(state.booking?.familyOpensAt), Date.parse(state.booking?.generalOpensAt)].filter((time) => time > now());
     if (times.length) closeTimer = setTimeout(renderSlots, Math.min(2147483647, Math.max(0, Math.min(...times) - now() + 50)));
   }
   function renderSlots() {
     clearTimeout(closeTimer);
+    const familyTime = Date.parse(state.booking?.familyOpensAt);
+    const generalTime = Date.parse(state.booking?.generalOpensAt);
+    const policyReady = Number.isFinite(familyTime) && Number.isFinite(generalTime);
+    const beforeOpening = !policyReady || now() < familyTime;
+    $('bookingWindow').textContent = !policyReady ? '予約受付時間を確認しています…' : now() < familyTime ? '家族向け先行予約は10月30日11:30から、一般予約は19:00から開始します。' : now() < generalTime ? '家族向け先行予約を受付中です。共通コードを入力してください。一般予約は19:00からです。' : '一般予約を受付中です。家族向けコードは任意です。';
+    $('priorityCodeHelp').textContent = now() < generalTime ? '先行予約には家族向け共通コードが必要です。' : '一般予約では入力不要です。';
+    $('bookingForm').querySelector('[type="submit"]').disabled = beforeOpening;
     const focusWasOnTabs = tabsEl.contains(document.activeElement);
     if (!state.slots.length) {
       tabsEl.innerHTML = '';
@@ -55,7 +62,7 @@ export function createSlots({ state, api, setApiStatus }) {
             <div class="slot-title">${escapeHtml(slot.title)}</div>
             <div class="slot-meta">残り <strong>${left}</strong> / ${escapeHtml(slot.capacity)} 名</div>
             <div class="capacity" aria-hidden="true"><span style="width:${usedPct}%"></span></div></div>
-          <button class="slot-select" type="button" data-select-slot="${escapeHtml(slot.id)}" ${ended || soldout ? 'disabled' : ''}>${ended ? '受付終了' : soldout ? '満席' : '選択'}</button>
+          <button class="slot-select" type="button" data-select-slot="${escapeHtml(slot.id)}" ${ended || soldout || beforeOpening ? 'disabled' : ''}>${ended ? '受付終了' : soldout ? '満席' : beforeOpening ? '受付開始前' : '選択'}</button>
         </article>`;
     }).join('');
     slotSelect.innerHTML = '<option value="">日時を選択してください</option>' + visible
@@ -93,6 +100,7 @@ export function createSlots({ state, api, setApiStatus }) {
       const serverTime = Date.parse(body.serverTime);
       if (Number.isFinite(serverTime)) state.clockOffset = serverTime - (requestStarted + Date.now()) / 2;
       state.slots = Array.isArray(body.slots) ? body.slots : [];
+      state.booking = body.booking;
       renderSlots();
       setApiStatus('online', '4D Kosensai DBへ接続しています…');
     } catch (err) {

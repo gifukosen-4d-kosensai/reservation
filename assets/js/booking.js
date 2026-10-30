@@ -12,6 +12,14 @@ export function initBooking({ state, config, api, selectedSlot, loadSlots, reset
     const partySize = Number($('partySize').value);
     const email = $('email').value.trim();
     const passphrase = $('passphrase').value;
+    const priorityCode = $('priorityCode').value.trim();
+    const currentTime = Date.now() + (state.clockOffset || 0);
+    if (!state.booking || !Number.isFinite(Date.parse(state.booking.familyOpensAt)) || !Number.isFinite(Date.parse(state.booking.generalOpensAt)))
+      throw new Error('予約受付時間を確認できません。再読み込みしてください。');
+    if (currentTime < Date.parse(state.booking.familyOpensAt))
+      throw new Error('予約受付は10月30日11:30から開始します。');
+    if (currentTime < Date.parse(state.booking.generalOpensAt) && !priorityCode)
+      throw new Error('先行予約には家族向け共通コードが必要です。');
     if (!slot) throw new Error('発表日時を選択してください。');
     if (new Date(slot.startAt).getTime() <= Date.now() + (state.clockOffset || 0))
       throw new Error('この発表枠の受付は終了しています。');
@@ -28,6 +36,7 @@ export function initBooking({ state, config, api, selectedSlot, loadSlots, reset
       partySize,
       email,
       passphrase,
+      priorityCode,
       deviceId: getOrCreateDeviceId(),
       turnstileToken: state.turnstileToken,
     };

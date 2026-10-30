@@ -1,8 +1,8 @@
 import { $ } from './utils.js';
 import { createApi } from './api.js';
-import { createSlots } from './slots.js';
+import { createSlots } from './slots.js?v=priority-20261030';
 import { createTurnstile } from './turnstile.js';
-import { initBooking } from './booking.js';
+import { initBooking } from './booking.js?v=priority-20261030';
 import { initManage } from './manage.js';
 import { connectRealtime } from './realtime.js';
 /** 画面の入口。各機能を組み立てます。機能の詳細は隣のモジュールへ。 */
@@ -41,3 +41,4 @@ window.addEventListener('pageshow', (event) => {
     disconnect = connectRealtime({ API_BASE, state, loadSlots: slots.loadSlots, setApiStatus });
   }
 });
+

@@ -80,7 +80,13 @@
 
             <div id="bookPanel" class="tab-panel">
               <h2 id="form-title"><span class="en">ENTRY</span>予約情報</h2>
+              <p id="bookingWindow" class="form-note" role="status">予約受付時間を確認しています…</p>
               <form id="bookingForm" class="form-grid" novalidate>
+                <div class="field">
+                  <label for="priorityCode">家族向け先行予約コード</label>
+                  <input id="priorityCode" name="priorityCode" type="password" autocomplete="off" maxlength="128" />
+                  <small id="priorityCodeHelp">10月30日11:30〜19:00の先行予約に必要です。一般予約では不要です。</small>
+                </div>
                 <div class="field">
                   <label for="slotId">発表日時</label
                   ><select id="slotId" name="slotId" required>
@@ -228,7 +234,7 @@
       </div>
     </footer>
     <script src="./config.js"></script>
-    <script src="./assets/js/app.js" type="module"></script>
+    <script src="./assets/js/app.js?v=priority-20261030" type="module"></script>
   </body>
 </html>
 
