@@ -15,7 +15,7 @@
       <div class="hero__inner">
         <div class="hero__eyebrow">4D KOSENSAI SENMONTEN · BOOKING SYSTEM</div>
         <h1><span>RESER</span>VATION</h1>
-        <p class="hero__jp">専門展発表 予約受付</p>
+        <p class="hero__jp">専門店発表 予約受付</p>
         <p class="hero__note">
         </p>
       </div>
@@ -52,11 +52,12 @@
         <div class="inner booking-layout">
           <section class="panel" aria-labelledby="slots-title">
             <h2 id="slots-title"><span class="en">SCHEDULE</span>日時・残席</h2>
+            <div id="dateTabs" class="date-tabs" role="tablist" aria-label="発表日"></div>
             <div class="status-bar">
               <span id="apiStatusDot" class="status-dot"></span
               ><span id="apiStatusText">4D Kosensai DBへ接続しています…</span>
             </div>
-            <div id="slots" class="slots" aria-live="polite"><p>読込中…</p></div>
+            <div id="slots" class="slots" role="tabpanel" aria-live="polite"><p>読込中…</p></div>
             <div class="notice">
               <p>
                 予約は原則として1人につき1件です。重複予約は行わないでください。
@@ -230,3 +231,4 @@
     <script src="./assets/js/app.js" type="module"></script>
   </body>
 </html>
+

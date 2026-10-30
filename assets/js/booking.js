@@ -13,6 +13,8 @@ export function initBooking({ state, config, api, selectedSlot, loadSlots, reset
     const email = $('email').value.trim();
     const passphrase = $('passphrase').value;
     if (!slot) throw new Error('発表日時を選択してください。');
+    if (new Date(slot.startAt).getTime() <= Date.now() + (state.clockOffset || 0))
+      throw new Error('この発表枠の受付は終了しています。');
     if (!Number.isInteger(partySize) || partySize < 1 || partySize > 6)
       throw new Error('人数が正しくありません。');
     if (partySize > remaining(slot)) throw new Error('選択した人数分の残席がありません。');
@@ -88,3 +90,4 @@ export function initBooking({ state, config, api, selectedSlot, loadSlots, reset
     state.pendingPayload = null;
   });
 }
+
