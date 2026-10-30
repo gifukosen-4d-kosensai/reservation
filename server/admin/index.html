@@ -1,0 +1,97 @@
+<!doctype html>
+<html lang="ja" data-theme="dark">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="theme-color" content="#212121">
+    <title>予約管理 | 4D専門展</title>
+    <link rel="stylesheet" href="/admin.css">
+    <script src="/admin.js" defer></script>
+  </head>
+  <body>
+    <a class="skip-link" href="#main">本文へ移動</a>
+    <aside class="sidebar" aria-label="管理メニュー">
+      <a class="brand" href="#main" aria-label="予約管理トップ">
+        <span class="brand-mark" aria-hidden="true">4D</span>
+        <span class="brand-name"><strong>KOSENSAI</strong><small>RESERVATION SYSTEM</small></span>
+      </a>
+      <nav id="dashboardNav" class="side-nav" aria-label="管理メニュー" hidden>
+        <a href="#overview" class="active"><svg class="nav-icon" aria-hidden="true" viewBox="0 0 24 24"><rect x="3" y="3" width="7" height="7" rx="1"></rect><rect x="14" y="3" width="7" height="7" rx="1"></rect><rect x="3" y="14" width="7" height="7" rx="1"></rect><rect x="14" y="14" width="7" height="7" rx="1"></rect></svg>概要</a>
+        <a href="#schedule"><svg class="nav-icon" aria-hidden="true" viewBox="0 0 24 24"><rect x="3" y="5" width="18" height="16" rx="2"></rect><path d="M7 3v4M17 3v4M3 10h18M7 14h3M14 14h3M7 18h3"></path></svg>発表枠</a>
+        <a href="#reservationList"><svg class="nav-icon" aria-hidden="true" viewBox="0 0 24 24"><path d="M9 6h12M9 12h12M9 18h12"></path><circle cx="4.5" cy="6" r="1"></circle><circle cx="4.5" cy="12" r="1"></circle><circle cx="4.5" cy="18" r="1"></circle></svg>予約一覧</a>
+      </nav>
+      <div class="sidebar-bottom">
+        <div class="sidebar-actions">
+          <button id="themeToggle" class="sidebar-button" type="button" aria-pressed="false"><svg class="nav-icon" aria-hidden="true" viewBox="0 0 24 24"><circle cx="12" cy="12" r="4"></circle><path d="M12 2v2M12 20v2M4.93 4.93l1.42 1.42M17.65 17.65l1.42 1.42M2 12h2M20 12h2M4.93 19.07l1.42-1.42M17.65 6.35l1.42-1.42"></path></svg><span id="themeLabel">ライトモード</span></button>
+          <button id="logout" class="sidebar-button" type="button" hidden><svg class="nav-icon" aria-hidden="true" viewBox="0 0 24 24"><path d="M10 17v2a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h3a2 2 0 0 1 2 2v2M13 8l4 4-4 4M7 12h10"></path></svg>ログアウト</button>
+        </div>
+        <span class="side-caption">4D KOSENSAI / 2026</span>
+      </div>
+    </aside>
+    <div class="page-shell">
+      <main id="main">
+        <section id="login" class="login-wrap" aria-labelledby="login-title">
+          <p class="section-index">01 / ADMIN ACCESS</p>
+          <div class="panel login-panel">
+            <p class="eyebrow"><span></span> 4D KOSENSAI / MANAGEMENT</p>
+            <h1 id="login-title">管理者ログイン<span class="accent">.</span></h1>
+            <p class="lead">予約の状況確認や受付管理を行います。</p>
+            <form id="loginForm">
+              <label for="password">パスワード</label>
+              <input type="password" id="password" required autocomplete="current-password">
+              <button class="primary-button" type="submit">ログイン <svg class="button-icon" aria-hidden="true" viewBox="0 0 24 24"><path d="M5 12h14M14 7l5 5-5 5"></path></svg></button>
+            </form>
+            <p id="loginError" class="error" role="alert"></p>
+          </div>
+        </section>
+        <div id="dashboard" hidden>
+          <section id="overview" class="dashboard-intro" aria-labelledby="overview-title">
+            <p class="section-index">01 / OVERVIEW</p>
+            <div class="overview-header">
+              <div><p class="kicker">RESERVATION / DASHBOARD</p><h1 id="overview-title">予約管理<span class="accent">.</span></h1><p class="lead">発表枠と受付状況をまとめて確認できます。</p></div>
+              <div class="toolbar"><span id="status" role="status"></span><button id="refresh" class="outline-button" type="button">更新 <svg class="button-icon" aria-hidden="true" viewBox="0 0 24 24"><path d="M20 7v5h-5M4 17v-5h5"></path><path d="M6 9a7 7 0 0 1 11.5-2L20 12M4 12l2.5 5A7 7 0 0 0 18 15"></path></svg></button></div>
+            </div>
+            <div class="metrics">
+              <article><span class="metric-index">01 / TIME</span><span class="metric-label">現在時刻</span><div class="metric-readout"><span id="clockDate" class="metric-detail">—</span><strong id="clock" class="metric-number metric-time">--:--:--</strong></div></article>
+              <article><span class="metric-index">02 / NEXT</span><span class="metric-label">次の予約がある発表</span><div class="metric-readout"><span id="nextDate" class="metric-detail" hidden></span><strong id="next" class="metric-number metric-time" hidden></strong><span id="nextEmpty" class="metric-empty">予定なし</span></div></article>
+              <article><span class="metric-index">03 / CHECK-IN</span><span class="metric-label">案内済み</span><div class="metric-readout metric-count"><strong id="checked" class="metric-number">—</strong><span class="metric-unit">人</span></div></article>
+              <article><span class="metric-index">04 / CURRENT</span><span class="metric-label">現在の枠の予約人数</span><div class="metric-readout"><div id="currentCount" class="metric-count" hidden><strong id="current" class="metric-number">—</strong><span class="metric-unit">人</span></div><span id="currentEmpty" class="metric-empty">開催中の枠なし</span></div></article>
+            </div>
+            <p class="note">案内済みは「受付済み」にした予約の人数です。現在の枠は開始から終了までの時間で表示します。15秒ごとに更新します。</p>
+            <div class="panel">
+              <h2>家族向け先行予約</h2>
+              <p>10月30日11:30から先行予約、19:00から一般予約を受け付けます。共通コードを家族の方へお知らせください。</p>
+              <label for="familyCode">共通コード</label>
+              <input id="familyCode" type="password" readonly autocomplete="off">
+              <button id="showFamilyCode" class="outline-button" type="button">表示</button>
+              <button id="copyFamilyCode" class="outline-button" type="button">コピー</button>
+              <span id="familyCodeStatus" role="status"></span>
+            </div>
+          </section>
+          <section id="schedule" class="content-section" aria-labelledby="schedule-title">
+            <p class="section-index">02 / SCHEDULE</p>
+            <div class="panel"><div class="panel-heading"><div><p class="eyebrow"><span></span> SESSION OVERVIEW</p><h2 id="schedule-title">発表枠</h2></div></div><div id="slots"></div></div>
+          </section>
+          <section id="reservationList" class="content-section" aria-labelledby="reservations-title">
+            <p class="section-index">03 / RESERVATIONS</p>
+            <div class="panel"><div class="panel-heading"><div><p class="eyebrow"><span></span> RESERVATION LIST</p><h2 id="reservations-title">予約一覧</h2></div></div>
+              <div class="filters"><label>発表枠 <select id="slotFilter"><option value="">すべて</option></select></label><label>状態 <select id="stateFilter"><option value="">すべて</option><option value="confirmed">確定</option><option value="cancelled">キャンセル</option></select></label><label class="search-filter">検索 <input id="search" type="search" placeholder="メール・予約ID"></label></div>
+              <div class="table-wrap"><table><thead><tr><th>日時 / 発表</th><th>メール / 予約ID</th><th>人数</th><th>状態 / メール</th><th>受付</th></tr></thead><tbody id="reservations"></tbody></table></div>
+              <p id="empty" class="empty" hidden>該当する予約はありません。</p>
+            </div>
+          </section>
+        </div>
+      </main>
+      <footer class="footer"><strong>4D KOSENSAI</strong><span>RESERVATION MANAGEMENT</span></footer>
+    </div>
+    <dialog id="deleteDialog" aria-labelledby="delete-title" aria-describedby="delete-warning">
+      <p class="eyebrow"><span></span> DELETE RESERVATION</p>
+      <h2 id="delete-title">予約を完全に削除しますか？</h2>
+      <p id="delete-warning">予約データは元に戻せません。受付済みの記録も削除され、予約者へのメール通知は送信されません。バックアップ内のデータは削除されません。</p>
+      <div id="deleteSummary" class="dialog-summary"></div>
+      <p id="deleteError" class="error" role="alert"></p>
+      <div class="dialog-actions"><button id="deleteCancel" class="outline-button" type="button">戻る</button><button id="deleteConfirm" class="primary-button danger-button" type="button">完全に削除する</button></div>
+    </dialog>
+  </body>
+</html>
+
