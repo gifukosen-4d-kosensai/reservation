@@ -1,5 +1,7 @@
 import { $, escapeHtml, formatDateTime, remaining } from './utils.js';
 import { getOrCreateDeviceId } from './device.js';
+const VOTE_URL =
+  'https://docs.google.com/forms/d/e/1FAIpQLSf6AiKZveN8sVM4wFl-uW7-1Ar4-hGQxH_Jt2HbgaGyFv9V5Q/viewform?usp=publish-editor';
 import { openMessage, showError, clearError } from './dialogs.js';
 /** 入力→注意事項→同意→API送信。送信中は再送信を受け付けません。 */
 export function initBooking({ state, config, api, selectedSlot, loadSlots, resetTurnstile }) {
@@ -80,7 +82,7 @@ export function initBooking({ state, config, api, selectedSlot, loadSlots, reset
       await loadSlots({ quiet: true });
       openMessage(
         '予約が完了しました',
-        `<p>予約を受け付けました。</p><p class="result-id">予約ID：${escapeHtml(body.reservation.id)}</p><p>${escapeHtml(formatDateTime(body.reservation.startAt))} / ${escapeHtml(body.reservation.partySize)}名</p><p>${body.emailSent ? '予約完了メールを送信しました。' : '予約は完了していますが、メール送信に失敗しました。係員へ予約IDをお伝えください。'}</p>`,
+        `<p>予約を受け付けました。</p><p class="result-id">予約ID：${escapeHtml(body.reservation.id)}</p><p>${escapeHtml(formatDateTime(body.reservation.startAt))} / ${escapeHtml(body.reservation.partySize)}名</p><p>${body.emailSent ? '予約完了メールを送信しました。' : '予約は完了していますが、メール送信に失敗しました。係員へ予約IDをお伝えください。'}</p><div class="vote-cta"><p>4年電子制御工学科の専門店に是非投票よろしくお願いします！</p><a class="btn" href="${VOTE_URL}" target="_blank" rel="noopener noreferrer">投票する</a></div>`,
       );
     } catch (err) {
       termsDialog.close();
